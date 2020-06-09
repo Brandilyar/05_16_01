@@ -1,10 +1,9 @@
 import random
 
-inches = 40 #допустим у нас только 40 дюймов. Мы как маленький, у которого нет справочника, сколько сантиметров дюйме
-centimtre = 101.6
 
 
-def kid_neuro(epoch, lr, accur):
+
+def kid_neuro(epoch, lr, accur,inches,centimtre):
     """
     :param epoch: сколько раз у нас она попробует подобрать правильный коэфицент W
     :param lr: learning rate - насколько широкими шагами мы попробуем двигаться
@@ -12,21 +11,24 @@ def kid_neuro(epoch, lr, accur):
     :return:
     """
     W_coef = random.uniform(1, 3)
-    print(f"Наш первончальный вес равен: {W_coef}") #чтобы понимал, что нам выкинул рандом
-    for i in range(epoch): #воспользуемся циклами для прокрутки эпох
-        Error = centimtre - (inches * W_coef)
+     #чтобы понимал, что нам выкинул рандом
+    for i in range(int(epoch)): #воспользуемся циклами для прокрутки эпох
+        Error = float(centimtre) - (float(inches) * W_coef)
+       
         # ошибка - один из самых важных элементов нейронной сети. Потому что она показывает, куда надо идти
-        print(f"Наша ошибка составляет {Error}") # будем печатать ошибки для визуализации
+        # будем печатать ошибки для визуализации
 
-        if abs(Error) <accur:
-            print(f"Наш итоговый результат {W_coef}")
+        if abs(Error) <float(accur):
+            
+            break
             # нас интересует только значение  по модулю
         if Error > 0:
-            W_coef+= lr
+            W_coef+= float(lr)
             #если ошибка у нас положительная, тогда нам нужно наращить вес
         elif Error < 0:
-            W_coef -= lr
+            W_coef -= float(lr)
             #Если ошибка у нас отрицательная, тогда нам нужно уменьшить вес
+    return W_coef
 
             
 
